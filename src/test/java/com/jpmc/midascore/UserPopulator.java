@@ -22,7 +22,12 @@ public class UserPopulator {
         for (String userLine : userLines) {
             String[] userData = userLine.split(", ");
             UserRecord user = new UserRecord(userData[0], Float.parseFloat(userData[1]));
-            userRepository.save(user);
+            if(userRepository.existsByName(userData[0])){
+                System.out.println("already  user exists  is :- "+userRepository.findByName(userData[0]));
+            }else{
+                userRepository.save(user);
+                System.out.println("new user is :- " +userRepository.findByName(userData[0]));
+            }
         }
     }
 }

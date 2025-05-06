@@ -6,7 +6,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 
 @EnableKafka
 @SpringBootApplication
-public class MidasCoreApplication {
+public class    MidasCoreApplication {
 
     public static void main(String[] args) {
 

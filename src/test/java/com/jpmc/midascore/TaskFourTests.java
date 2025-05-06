@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 
+
 @SpringBootTest
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
@@ -27,11 +28,12 @@ public class TaskFourTests {
     void task_four_verifier() throws InterruptedException {
         userPopulator.populate();
         String[] transactionLines = fileLoader.loadStrings("/test_data/alskdjfh.fhdjsk");
+
+        Thread.sleep(20000);
         for (String transactionLine : transactionLines) {
             kafkaProducer.send(transactionLine);
+            System.out.println("here transaction :- " + transactionLine);
         }
-        Thread.sleep(2000);
-
 
         logger.info("----------------------------------------------------------");
         logger.info("----------------------------------------------------------");

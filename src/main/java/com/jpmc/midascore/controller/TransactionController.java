@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/transaction")
@@ -20,14 +19,8 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-//    @Autowired
-//    private UserService userService;
-
     @Autowired
     private UserRepository userRepository;
-
-
-
 
     @PostMapping("/process")
     public ResponseEntity<Boolean> processTransaction(@RequestBody TransactionRecord transactionRecord){
@@ -43,19 +36,14 @@ public class TransactionController {
     }
 
     @GetMapping("/")
-    public String waldorfBalance(){
+    public List<?> waldorfBalance(){
         try{
             List<UserRecord> userRecord = (List<UserRecord>) userRepository.findAll();
-            return "users is :- " + userRecord;
+            return userRecord.stream().map(x-> x).toList();
         }catch (Exception e){
-            return " error for :- " + e.getMessage();
+            return List.of("hii");
         }
 
     }
 
-    @GetMapping("/sample")
-    public String sample(){
-
-        return "done";
-    }
 }
